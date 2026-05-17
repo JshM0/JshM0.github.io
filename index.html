@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Surviving Under the Line</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <div>
+        <h1>Surviving Under the Line</h1>
+        <p>Survive one year on a tight budget. Each choice can keep you afloat or push you over the edge.</p>
+      </div>
+      <div class="status-pill" id="status-pill">Month 1 of 12</div>
+    </header>
+
+    <div class="content-wrapper">
+      <aside class="side-panel left-panel">
+        <article class="card">
+          <h2>Budget Summary</h2>
+          <div class="summary-list">
+            <div><span>Rent + Utilities</span><strong id="bills-display">$0</strong></div>
+            <div><span>Food & Essentials</span><strong id="essentials-display">$0</strong></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <h2>Personal Situation</h2>
+          <div class="summary-list">
+            <div><span>Housing</span><strong id="housing-display">Stable</strong></div>
+            <div><span>Health</span><strong id="health-display">OK</strong></div>
+            <div><span>Support</span><strong id="support-display">None</strong></div>
+            <div><span>Stress</span><strong id="stress-display">Moderate</strong></div>
+          </div>
+        </article>
+      </aside>
+
+      <main class="center-column">
+        <section class="month-board card">
+          <div class="month-focus">
+            <div class="month-title">
+              <span>Month</span>
+              <strong id="month-display">1</strong>
+            </div>
+            <p class="month-objective">Plan your budget and choose how to get through this month. Every choice matters.</p>
+          </div>
+          <div class="month-info">
+            <div><span>Cash on Hand</span><strong id="cash-display">$0</strong></div>
+            <div><span>Income</span><strong id="income-display">$0</strong></div>
+            <div><span>Debt</span><strong id="debt-display">$0</strong></div>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill"></div>
+          </div>
+          <div class="event-preview">
+            <span class="preview-label">This Month's Challenge</span>
+            <span class="preview-text" id="event-preview">Make your choices to resolve this month.</span>
+          </div>
+        </section>
+
+        <section class="log-panel card">
+          <div class="log-header">
+            <h2>Situation Log</h2>
+            <button id="advance-button" class="primary">Resolve Month</button>
+          </div>
+          <div id="log-container" class="log-container"></div>
+        </section>
+      </main>
+
+      <aside class="side-panel right-panel">
+        <article class="card actions-card">
+          <h2>Monthly Choices</h2>
+          <div class="actions-list">
+            <button id="action-borrow" class="primary choice-card">
+              <span class="choice-title">Take a short-term loan</span>
+              <span class="choice-text">Borrow cash now to stay afloat, but debt will become heavier.</span>
+            </button>
+            <button id="action-cut" class="secondary choice-card">
+              <span class="choice-title">Skip a meal</span>
+              <span class="choice-text">Save a little money by cutting food costs, at the cost of comfort.</span>
+            </button>
+            <button id="action-support" class="secondary choice-card">
+              <span class="choice-title">Apply for assistance</span>
+              <span class="choice-text">Request aid this month and wait to see if it arrives.</span>
+            </button>
+            <button id="action-gig" class="secondary choice-card">
+              <span class="choice-title">Work overtime</span>
+              <span class="choice-text">Earn extra cash by putting in more hours, increasing your stress.</span>
+            </button>
+            <button id="action-paydebt" class="secondary choice-card">
+              <span class="choice-title">Pay debt</span>
+              <span class="choice-text">Use cash to reduce debt and ease pressure later.</span>
+            </button>
+          </div>
+        </article>
+      </aside>
+    </div>
+
+    
+  </div>
+
+  <section class="end-screen hidden" id="end-screen">
+    <div class="end-card">
+      <h2 id="end-title">Game Over</h2>
+      <p id="end-message">Your story ends here.</p>
+      <button id="restart-button" class="primary">Restart Game</button>
+    </div>
+  </section>
+
+  <script src="game.js"></script>
+</body>
+</html>
