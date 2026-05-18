@@ -77,19 +77,19 @@ function updateEventPreview() {
   let preview = 'Make your choices to resolve this month.';
   
   if (state.stress === 'Critical') {
-    preview = 'You\'re at your breaking point. Careful decisions needed now.';
+    preview = 'You\'re are under heavy stress. Watch out for your health.';
   } else if (state.housing === 'At Risk') {
     preview = 'Housing is becoming unstable. Find ways to stay afloat.';
   } else if (state.debt >= 2000) {
     preview = 'Debt is mounting. Consider paying down what you can.';
   } else if (state.cash < 100) {
-    preview = 'Cash is running low. You might need to borrow or work extra.';
+    preview = 'Cash is running low.';
   } else if (state.support === 'Pending') {
-    preview = 'Waiting for support decision. It could help or disappoint.';
+    preview = 'Waiting for support decision.';
   } else if (state.health === 'Poor') {
     preview = 'Your health is declining. Rest and care are critical.';
   } else if (state.month % 3 === 1) {
-    preview = 'Rent increases are coming soon. Start preparing now.';
+    preview = 'Rent increases are coming soon.';
   } else {
     preview = 'Managing month ' + state.month + '. Keep your budget balanced.';
   }

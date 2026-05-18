@@ -3,15 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Surviving Under the Line</title>
+  <title>Living Under the Line</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="app-shell">
     <header class="app-header">
       <div>
-        <h1>Surviving Under the Line</h1>
-        <p>Survive one year on a tight budget. Each choice can keep you afloat or push you over the edge.</p>
+        <h1>Living Under the Line</h1>
+        <p>Millions of Americans every year survive on a tight budget.</p>
+        <nav class="top-nav" aria-label="secondary">
+          <a href="resources.html" class="resources-link">Resources</a>
+        </nav>
       </div>
       <div class="status-pill" id="status-pill">Month 1 of 12</div>
     </header>
@@ -23,18 +26,14 @@
           <div class="summary-list">
             <div><span>Rent + Utilities</span><strong id="bills-display">$0</strong></div>
             <div><span>Food & Essentials</span><strong id="essentials-display">$0</strong></div>
-          </div>
-        </article>
+            <h2>Personal Situation</h2>
 
-        <article class="card">
-          <h2>Personal Situation</h2>
-          <div class="summary-list">
             <div><span>Housing</span><strong id="housing-display">Stable</strong></div>
             <div><span>Health</span><strong id="health-display">OK</strong></div>
             <div><span>Support</span><strong id="support-display">None</strong></div>
             <div><span>Stress</span><strong id="stress-display">Moderate</strong></div>
           </div>
-        </article>
+          
       </aside>
 
       <main class="center-column">
@@ -44,7 +43,7 @@
               <span>Month</span>
               <strong id="month-display">1</strong>
             </div>
-            <p class="month-objective">Plan your budget and choose how to get through this month. Every choice matters.</p>
+            <p class="month-objective">Plan your budget and choose how to get through this month.</p>
           </div>
           <div class="month-info">
             <div><span>Cash on Hand</span><strong id="cash-display">$0</strong></div>
@@ -75,7 +74,7 @@
           <div class="actions-list">
             <button id="action-borrow" class="primary choice-card">
               <span class="choice-title">Take a short-term loan</span>
-              <span class="choice-text">Borrow cash now to stay afloat, but debt will become heavier.</span>
+              <span class="choice-text">Borrow cash now, but interest will accumulate.</span>
             </button>
             <button id="action-cut" class="secondary choice-card">
               <span class="choice-title">Skip a meal</span>
@@ -91,7 +90,7 @@
             </button>
             <button id="action-paydebt" class="secondary choice-card">
               <span class="choice-title">Pay debt</span>
-              <span class="choice-text">Use cash to reduce debt and ease pressure later.</span>
+              <span class="choice-text">Use cash to reduce debt and ease pressure.</span>
             </button>
           </div>
         </article>
@@ -105,6 +104,7 @@
     <div class="end-card">
       <h2 id="end-title">Game Over</h2>
       <p id="end-message">Your story ends here.</p>
+      <p id="end-resources-link"><a href="resources.html" class="primary">Explore Resources</a></p>
       <button id="restart-button" class="primary">Restart Game</button>
     </div>
   </section>
