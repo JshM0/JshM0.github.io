@@ -139,7 +139,7 @@ function resolveSupportDecision() {
     logEntry('Aid Approved', 'A support payment arrived to help cover essentials this month.');
   } else {
     state.support = 'None';
-    logEntry('Aid Denied', 'Your application did not succeed. Keep making careful decisions.');
+    logEntry('Aid Denied', 'Your application did not succeed. You can apply again next month.');
   }
 }
 
@@ -174,7 +174,7 @@ function addRandomEvent() {
     logEntry('Rising Costs', `Food and essential prices rose by ${formatMoney(extraCost)}.`);
     changeStress(1);
   } else {
-    logEntry('Quiet Month', 'A month passed without major surprises. Stay sharp and keep the budget balanced.');
+    logEntry('Quiet Month', 'A month passed without major surprises.');
   }
 }
 
@@ -202,7 +202,7 @@ function payMonth() {
 
 function evaluateEndGame() {
   if (state.month > state.goals) {
-    endGame(true, 'You made it through the year. Keep learning from every choice.');
+    endGame(true, 'You made it through the year.');
     return true;
   }
 
