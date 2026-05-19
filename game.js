@@ -30,7 +30,7 @@ const actions = {
 
 const state = {
   month: 1,
-  income: 1300,
+  income: 1330,
   cash: 600,
   bills: 650,
   essentials: 220,
@@ -77,9 +77,9 @@ function updateEventPreview() {
   let preview = 'Make your choices to resolve this month.';
   
   if (state.stress === 'Critical') {
-    preview = 'You\'re are under heavy stress. Watch out for your health.';
+    preview = 'You\'re are under heavy stress.';
   } else if (state.housing === 'At Risk') {
-    preview = 'Housing is becoming unstable. Find ways to stay afloat.';
+    preview = 'Housing is becoming unstable.';
   } else if (state.debt >= 2000) {
     preview = 'Debt is mounting. Consider paying down what you can.';
   } else if (state.cash < 100) {
@@ -87,7 +87,7 @@ function updateEventPreview() {
   } else if (state.support === 'Pending') {
     preview = 'Waiting for support decision.';
   } else if (state.health === 'Poor') {
-    preview = 'Your health is declining. Rest and care are critical.';
+    preview = 'Your health is declining.';
   } else if (state.month % 3 === 1) {
     preview = 'Rent increases are coming soon.';
   } else {
@@ -207,7 +207,17 @@ function evaluateEndGame() {
   }
 
   if (state.debt >= 3000 || state.housing === 'Eviction' || state.health === 'Sick') {
-    endGame(false, 'The pressure became too much. Your story ends here, but you can try again.');
+    message = '';
+    if(state.debt >= 3000) {
+      message += 'Your debt became unmanageable. ';
+    }
+    if(state.housing === 'Eviction') {
+      message += 'You lost your housing. ';
+    }
+    if(state.health === 'Sick') {
+      message += 'Your health declined too much. ';
+    }
+    endGame(false, `${message} Your story ends here, but you can try again.`);
     return true;
   }
 
@@ -260,7 +270,7 @@ function applyCutSpending() {
   if (!state.active) return;
   state.essentials = Math.max(160, Math.floor(state.essentials * 0.8));
   state.cash += 40;
-  logEntry('Skipped a meal', 'You cut back on food this month to save money. The extra cash helps carry you through.');
+  logEntry('Skipped a meal', 'You cut back on food this month to save money.');
   changeStress(-1);
   changeHealth(1);
   render();
