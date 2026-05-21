@@ -38,7 +38,7 @@ const state = {
   housing: 'Stable',
   health: 'OK',
   support: 'None',
-  stress: 'Moderate',
+  stress: 'Low',
   active: true,
   goals: 12,
 };
@@ -62,7 +62,11 @@ function getRandomInt(min, max) {
 function logEntry(title, message) {
   const entry = document.createElement('div');
   entry.className = 'log-entry';
-  entry.innerHTML = `<strong>${title}</strong><span>${message}</span>`;
+  entry.innerHTML = `
+    <div class="log-month">Month ${state.month}</div>
+    <strong>${title}</strong>
+    <span>${message}</span>
+  `;
   UI.log.prepend(entry);
 }
 
@@ -158,15 +162,13 @@ function addRandomEvent() {
       logEntry('Unexpected Bill', `A surprise repair cost ${formatMoney(cost)}. You covered it from cash.`);
     }
     changeStress(1);
-    changeHealth(1);
   } else if (roll <= 55) {
     const change = getRandomInt(-100, 160);
     state.income = Math.max(800, state.income + change);
     const title = change < 0 ? 'Pay Cut' : 'Extra Hours';
-    logEntry(title, `Your income ${change < 0 ? 'fell' : 'shifted'} by ${formatMoney(Math.abs(change))} this month.`);
+    logEntry(title, `Your income ${change < 0 ? 'fell' : 'increased'} by ${formatMoney(Math.abs(change))} this month.`);
     if (change < 0) {
       changeStress(1);
-      changeHousing(1);
     }
   } else if (roll <= 68) {
     const extraCost = getRandomInt(30, 90);
@@ -329,12 +331,12 @@ function restartGame() {
   state.housing = 'Stable';
   state.health = 'OK';
   state.support = 'None';
-  state.stress = 'Moderate';
+  state.stress = 'Low';
   state.active = true;
   UI.log.innerHTML = '';
   UI.endScreen.classList.add('hidden');
   document.body.classList.remove('modal-open');
-  logEntry('Game Started', 'A new year of survival begins. Manage carefully.');
+  logEntry('Game Started', 'A new year of survival begins.');
   render();
 }
 
