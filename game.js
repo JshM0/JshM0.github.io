@@ -14,7 +14,11 @@ const UI = {
   endScreen: document.getElementById('end-screen'),
   endTitle: document.getElementById('end-title'),
   endMessage: document.getElementById('end-message'),
-  eventPreview: document.getElementById('event-preview'),
+  summaryModal: document.getElementById('month-summary'),
+  summaryTitle: document.getElementById('summary-title'),
+  summaryOverview: document.getElementById('summary-overview'),
+  summaryDetails: document.getElementById('summary-details'),
+  summaryClose: document.getElementById('summary-close'),
   progressFill: document.getElementById('progress-fill'),
 };
 
@@ -39,6 +43,7 @@ const state = {
   health: 'OK',
   support: 'None',
   stress: 'Low',
+  monthEvents: [],
   active: true,
   goals: 12,
 };
@@ -59,7 +64,7 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function logEntry(title, message) {
+function logEntry(title, message, options = {}) {
   const entry = document.createElement('div');
   entry.className = 'log-entry';
   entry.innerHTML = `
@@ -68,37 +73,16 @@ function logEntry(title, message) {
     <span>${message}</span>
   `;
   UI.log.prepend(entry);
+
+  if (options.monthSummary !== false) {
+    state.monthEvents.push({ title, message });
+  }
 }
 
 function updateStatus() {
   UI.status.textContent = `Month ${state.month} of ${state.goals}`;
   const progress = (state.month / state.goals) * 100;
   UI.progressFill.style.width = progress + '%';
-  updateEventPreview();
-}
-
-function updateEventPreview() {
-  let preview = 'Make your choices to resolve this month.';
-  
-  if (state.stress === 'Critical') {
-    preview = 'You\'re are under heavy stress.';
-  } else if (state.housing === 'At Risk') {
-    preview = 'Housing is becoming unstable.';
-  } else if (state.debt >= 2000) {
-    preview = 'Debt is mounting. Consider paying down what you can.';
-  } else if (state.cash < 100) {
-    preview = 'Cash is running low.';
-  } else if (state.support === 'Pending') {
-    preview = 'Waiting for support decision.';
-  } else if (state.health === 'Poor') {
-    preview = 'Your health is declining.';
-  } else if (state.month % 3 === 1) {
-    preview = 'Rent increases are coming soon.';
-  } else {
-    preview = 'Managing month ' + state.month + '. Keep your budget balanced.';
-  }
-  
-  UI.eventPreview.textContent = preview;
 }
 
 function render() {
@@ -113,6 +97,35 @@ function render() {
   UI.support.textContent = state.support;
   UI.stress.textContent = state.stress;
   updateStatus();
+}
+
+function buildSummaryOverview(completedMonth) {
+  const debtSummary = state.debt === 0 ? 'no debt' : formatMoney(state.debt) + ' debt';
+  return `Month ${completedMonth} ended with ${formatMoney(state.cash)}, ${debtSummary}, ${state.housing.toLowerCase()} housing, ${state.health.toLowerCase()} health, and ${state.stress.toLowerCase()} stress.`;
+}
+
+function showMonthSummary(completedMonth) {
+  UI.summaryTitle.textContent = `Month ${completedMonth} Summary`;
+  UI.summaryOverview.textContent = buildSummaryOverview(completedMonth);
+  UI.summaryDetails.innerHTML = '';
+
+  state.monthEvents.forEach(event => {
+    const item = document.createElement('li');
+    item.innerHTML = `<strong>${event.title}:</strong> ${event.message}`;
+    UI.summaryDetails.appendChild(item);
+  });
+
+  UI.summaryModal.classList.remove('hidden');
+  document.body.classList.add('modal-open');
+  state.active = false;
+}
+
+function hideMonthSummary() {
+  UI.summaryModal.classList.add('hidden');
+  document.body.classList.remove('modal-open');
+  state.monthEvents = [];
+  state.active = true;
+  render();
 }
 
 function changeHealth(amount) {
@@ -209,14 +222,14 @@ function evaluateEndGame() {
   }
 
   if (state.debt >= 3000 || state.housing === 'Eviction' || state.health === 'Sick') {
-    message = '';
-    if(state.debt >= 3000) {
+    let message = '';
+    if (state.debt >= 3000) {
       message += 'Your debt became unmanageable. ';
     }
-    if(state.housing === 'Eviction') {
+    if (state.housing === 'Eviction') {
       message += 'You lost your housing. ';
     }
-    if(state.health === 'Sick') {
+    if (state.health === 'Sick') {
       message += 'Your health declined too much. ';
     }
     endGame(false, `${message} Your story ends here, but you can try again.`);
@@ -237,6 +250,7 @@ function endGame(victory, message) {
 function advanceMonth() {
   if (!state.active) return;
 
+  const completedMonth = state.month;
   state.cash += state.income;
   logEntry('Income Received', `You received ${formatMoney(state.income)} in monthly income.`);
 
@@ -255,7 +269,7 @@ function advanceMonth() {
       logEntry('Cost Increase', `Rent and utilities rose by ${formatMoney(increase)} this month.`);
       changeStress(1);
     }
-    render();
+    showMonthSummary(completedMonth);
   }
 }
 
@@ -320,6 +334,7 @@ actions.gig.addEventListener('click', applyGig);
 actions.payDebt.addEventListener('click', applyPayDebt);
 actions.advance.addEventListener('click', advanceMonth);
 actions.restart.addEventListener('click', restartGame);
+UI.summaryClose.addEventListener('click', hideMonthSummary);
 
 function restartGame() {
   state.month = 1;
@@ -332,9 +347,11 @@ function restartGame() {
   state.health = 'OK';
   state.support = 'None';
   state.stress = 'Low';
+  state.monthEvents = [];
   state.active = true;
   UI.log.innerHTML = '';
   UI.endScreen.classList.add('hidden');
+  UI.summaryModal.classList.add('hidden');
   document.body.classList.remove('modal-open');
   logEntry('Game Started', 'A new year of survival begins.');
   render();
