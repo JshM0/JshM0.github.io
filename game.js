@@ -35,9 +35,9 @@ const actions = {
 const state = {
   month: 1,
   income: 1330,
-  cash: 600,
+  cash: 1000,
   bills: 650,
-  essentials: 220,
+  essentials: 320,
   debt: 0,
   housing: 'Stable',
   health: 'OK',
@@ -339,9 +339,9 @@ UI.summaryClose.addEventListener('click', hideMonthSummary);
 function restartGame() {
   state.month = 1;
   state.income = 1300;
-  state.cash = 600;
+  state.cash = 1000;
   state.bills = 650;
-  state.essentials = 220;
+  state.essentials = 320;
   state.debt = 0;
   state.housing = 'Stable';
   state.health = 'OK';

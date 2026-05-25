@@ -17,12 +17,25 @@
   <div class="content-wrapper">
     <aside class="side-panel left-panel">
       <article class="card">
-        <h2>Budget Summary</h2>
-        <div class="summary-list">
-          <div><span>Rent + Utilities</span><strong id="bills-display">$0</strong></div>
-          <div><span>Food & Essentials</span><strong id="essentials-display">$0</strong></div>
-          <h2>Personal Situation</h2>
+        <h2>Game Introduction</h2>
+        <p>Welcome to Living Under the Line. The goal of this game is to try and survive twelve months while living at the national poverty level.
+          The budget summary keeps track of monthly expenses, while the personal situation reflects the current state of life.
+          Monthly choices are options you can try and take to improve your situation. 
 
+          The game will end if you reach month 12, amass over $3000 in debt, lose your home, or become too sick to work.
+        </p>
+
+
+        
+        <div class="summary-list">
+          <p></p>
+          <h2>Budget Summary</h2>
+          <div><span>Rent and Utilities</span><strong id="bills-display">$0</strong></div>
+          <div><span>Food and Essentials</span><strong id="essentials-display">$0</strong></div>
+
+          <p></p>
+
+          <h2>Personal Situation</h2>
           <div><span>Housing</span><strong id="housing-display">Stable</strong></div>
           <div><span>Health</span><strong id="health-display">OK</strong></div>
           <div><span>Support</span><strong id="support-display">None</strong></div>
@@ -38,7 +51,7 @@
             <span>Month</span>
             <strong id="month-display">1</strong>
           </div>
-          <div class="status-pill" id="status-pill">Month 1 of 12</div>
+          <!-- <div class="status-pill" id="status-pill">Month 1 of 12</div> -->
           <p class="month-objective">Plan your budget and figure out how to survive twelve months.</p>
         </div>
         <div class="month-info">
@@ -46,9 +59,10 @@
           <div><span>Income</span><strong id="income-display">$0</strong></div>
           <div><span>Debt</span><strong id="debt-display">$0</strong></div>
         </div>
+        <!--
         <div class="progress-bar">
           <div class="progress-fill" id="progress-fill"></div>
-        </div>
+        </div>-->
       </section>
 
       <section class="log-panel card">
@@ -64,7 +78,7 @@
       <article class="card actions-card">
         <h2>Monthly Choices</h2>
         <div class="actions-list">
-          <button id="action-borrow" class="primary choice-card">
+          <button id="action-borrow" class="secondary choice-card">
             <span class="choice-title">Take a short-term loan</span>
             <p class="choice-text">Borrow money to cover immediate expenses, but be mindful of interest rates.</p>
           </button>
@@ -74,7 +88,7 @@
           </button>
           <button id="action-support" class="secondary choice-card">
             <span class="choice-title">Apply for assistance</span>
-            <p class="choice-text">Apply for  aid from welfare programs, and wait for a response.</p>
+            <p class="choice-text">Apply for aid and wait for a response.</p>
           </button>
           <button id="action-gig" class="secondary choice-card">
             <span class="choice-title">Work overtime</span>
@@ -106,7 +120,7 @@
       </div>
       <div class="summary-overview" id="summary-overview"></div>
       <div class="summary-details">
-        <h3>Specific Details</h3>
+        <h3>Monthly Recap</h3>
         <ul id="summary-details"></ul>
       </div>
     </div>

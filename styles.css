@@ -1,6 +1,6 @@
 :root {
   color-scheme: dark;
-  --panel-strong: #20242e;
+  --panel-strong: #151922;
   --text: #e5e7eb;
   --muted: #9ca3af;
   --border: rgba(255, 255, 255, 0.08);
@@ -40,14 +40,43 @@ button:hover {
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
 }
 
+.resources-page{
+  background: #151922;
+  min-height: 100vh;
+}
+
 .resources-intro {
-  max-width: 600px;
+  max-width: 80%;
   margin: 2rem;
   padding: 0 1rem;
   text-align: left;
   color: #d1d5db;
 }
 
+.resource-section{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 2rem;
+  margin: 1rem 2rem;
+  padding: 0 1rem;
+  border-radius: 0;
+}
+
+.resource-title {
+  margin: 2rem 0 1rem;
+  color: #f8fafc;
+  font-size: 1.25rem;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+}
+
+.resource-list{
+  display: grid;
+  gap: 1.5rem;
+  padding: 1rem 0 1rem 1.25rem;
+  margin: 0;
+}
 
 .title-bar {
   width: 100%;
@@ -157,15 +186,15 @@ button:hover {
 
 .summary-list {
   display: grid;
-  gap: 0.95rem;
-  margin-top: 1.2rem;
+  gap: 0.05rem;
+  margin-top: 0.05rem;
 }
 
 .summary-list div {
   display: flex;
   justify-content: space-between;
-  gap: 1rem;
-  padding: 0.95rem 0;
+  gap: 0.25rem;
+  padding: 0.2rem 0;
   border-bottom: 0px solid rgba(255,255,255,0.06);
 }
 
@@ -244,8 +273,8 @@ button:hover {
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  padding-bottom: 0.75rem;
-  margin-bottom: 1rem;
+  padding-bottom: 0.25rem;
+  margin-bottom: 0rem;
 }
 
 
@@ -340,7 +369,7 @@ button:hover {
 }
 
 .month-title strong {
-  font-size: 3.25rem;
+  font-size: 1.5rem;
   line-height: 1;
 }
 
@@ -354,14 +383,14 @@ button:hover {
 .month-info {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
+  gap: 0.1rem;
   padding-top: 0.5rem;
 }
 
 .month-info div {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 0;
+  /*background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);*/
+  border-radius: 15px;
   padding: 0.9rem 1rem;
   display: flex;
   flex-direction: column;
@@ -380,6 +409,7 @@ button:hover {
 }
 
 .progress-bar {
+  visibility: hidden;
   width: 100%;
   height: 6px;
   background: rgba(255,255,255,0.06);
@@ -432,7 +462,7 @@ button:hover {
 }
 
 .summary-overview {
-  margin-bottom: 1rem;
+  margin-bottom: 0.25rem;
   color: #d1d5db;
   line-height: 1.6;
 }
@@ -450,12 +480,13 @@ button:hover {
 }
 
 .summary-details li {
-  margin-bottom: 0.8rem;
+  margin-bottom: 0rem;
   line-height: 1.5;
 }
 
 .actions-list button {
-  padding: 1rem 1.15rem;
+  border-radius:15px;
+  padding: 0.75rem 0.75rem;
   font-weight: 600;
   background: rgba(255,255,255,0.04);
   border: 1px solid rgba(255,255,255,0.08);
@@ -488,6 +519,10 @@ button:hover {
 }
 
 @media (max-width: 920px) {
+  .resource-section {
+    grid-template-columns: 1fr;
+  }
+
   .month-info {
     grid-template-columns: 1fr;
   }
