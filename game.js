@@ -36,8 +36,8 @@ const state = {
   month: 1,
   income: 1330,
   cash: 1000,
-  bills: 650,
-  essentials: 320,
+  bills: 950,
+  essentials: 500,
   debt: 0,
   housing: 'Stable',
   health: 'OK',
@@ -156,7 +156,7 @@ function resolveSupportDecision() {
     logEntry('Aid Approved', 'A support payment arrived to help cover essentials this month.');
   } else {
     state.support = 'None';
-    logEntry('Aid Denied', 'Your application did not succeed. You can apply again next month.');
+    logEntry('Aid Denied', 'Your application did not succeed, but you can apply again next month.');
   }
 }
 
@@ -170,15 +170,15 @@ function addRandomEvent() {
     const remaining = cost - expense;
     if (remaining > 0) {
       state.debt += remaining;
-      logEntry('Unexpected Bill', `A surprise repair cost ${formatMoney(cost)}. You used cash and added ${formatMoney(remaining)} to debt.`);
+      logEntry('Unexpected Bill', `Your car broke down, and the repairs cost ${formatMoney(cost)}. You used cash and added ${formatMoney(remaining)} to debt.`);
     } else {
-      logEntry('Unexpected Bill', `A surprise repair cost ${formatMoney(cost)}. You covered it from cash.`);
+      logEntry('Unexpected Bill', `Your car broke down, and the repairs cost ${formatMoney(cost)}. You covered it from cash.`);
     }
     changeStress(1);
   } else if (roll <= 55) {
     const change = getRandomInt(-100, 160);
     state.income = Math.max(800, state.income + change);
-    const title = change < 0 ? 'Pay Cut' : 'Extra Hours';
+    const title = change < 0 ? 'Pay Cut' : 'Pay Raise';
     logEntry(title, `Your income ${change < 0 ? 'fell' : 'increased'} by ${formatMoney(Math.abs(change))} this month.`);
     if (change < 0) {
       changeStress(1);
@@ -189,7 +189,7 @@ function addRandomEvent() {
     logEntry('Rising Costs', `Food and essential prices rose by ${formatMoney(extraCost)}.`);
     changeStress(1);
   } else {
-    logEntry('Quiet Month', 'A month passed without major surprises.');
+    logEntry('Quiet Month', 'Fortunately, food and essentials did not increase in price this month.');
   }
 }
 
@@ -277,7 +277,7 @@ function applyBorrow() {
   if (!state.active) return;
   state.cash += 300;
   state.debt += 300;
-  logEntry('Short-term loan', 'You took out a loan for $300. Cash rose, but the debt burden increased.');
+  logEntry('Short-term loan', 'You took out a loan for $300. Make sure to pay this back before the debt becomes unmanageable.');
   changeStress(1);
   render();
 }
@@ -340,8 +340,8 @@ function restartGame() {
   state.month = 1;
   state.income = 1300;
   state.cash = 1000;
-  state.bills = 650;
-  state.essentials = 320;
+  state.bills = 950;
+  state.essentials = 500;
   state.debt = 0;
   state.housing = 'Stable';
   state.health = 'OK';
@@ -353,7 +353,7 @@ function restartGame() {
   UI.endScreen.classList.add('hidden');
   UI.summaryModal.classList.add('hidden');
   document.body.classList.remove('modal-open');
-  logEntry('Game Started', 'A new year of survival begins.');
+  logEntry('Game Started', 'A new year of survival begins. Can you survive twelve months living at the national poverty level?');
   render();
 }
 
